@@ -15,26 +15,42 @@ const btn = document.getElementById('enterName');
 btn.addEventListener('click', setName)
 
 function setName(){
+    const inputField = document.querySelector('input');
     const TamagotchiName = document.querySelector('input').value;
     document.getElementById('name').innerText = 'Tamagotchi Name: ' + TamagotchiName;
-    
-    start();
-    
-}
+    if(TamagotchiName == ""){
+        alert("enter name first");
+    }
+        inputField.value = "";
+        start();
+        console.log(tama.isRunning())
+    }
+
 const feedBtn = document.getElementById('feed');
 feedBtn.addEventListener('click', ()=>{
-    document.getElementById('feedBar').innerText = 'Hunger: ' + tama.setTimeUp();
-    if(tama.getTimeUp() <= 0){
-        console.log("gettimeup = 0")
-        tama.adjustTimeUp();
+    const checker = document.getElementById('name').innerText != 'choose a name for your Tamagotchi';
+    if(checker != ""){
+        document.getElementById('feedBar').innerText = 'Hunger: ' + tama.setTimeUp();
+        if(tama.getTimeUp() <= 0){
+            console.log("gettimeup = 0")
+            tama.adjustTimeUp();
+        }
+    }else{
+        alert("enter name first")
     }
 });
+
 const playBtn = document.getElementById('play');
 playBtn.addEventListener('click', ()=>{
-    document.getElementById('happinessBar').innerText = 'Happiness: ' + tama.setTimeDown();
-    if(tama.getTimeDown() >= 10){
-        console.log("gettimedown = 10")
-        tama.adjustTimeDown();
+    const checker = document.getElementById('name').innerText != 'choose a name for your Tamagotchi';
+    if(checker != ""){
+        document.getElementById('happinessBar').innerText = 'Happiness: ' + tama.setTimeDown();
+        if(tama.getTimeDown() >= 10){
+            console.log("gettimedown = 10")
+            tama.adjustTimeDown();
+        }
+    }else{
+        alert("enter name first")
     }
 });
 
@@ -54,7 +70,10 @@ function update(){
     if(tama.getTimeDown() == 0 || tama.getTimeUp() == 10) { 
         clearInterval(intervalID);
         img.src = lovelinRIP.href;
+        tama.stop();
+        tama.start();
     }
 }
+
 
 

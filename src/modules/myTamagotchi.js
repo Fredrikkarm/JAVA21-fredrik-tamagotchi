@@ -27,7 +27,6 @@ export class Tamagotchi{
     #updateHunger(){
         this.#timeup++;
         document.getElementById('feedBar').innerText = 'Hunger: ' + this.#timeup;
-        //console.log(this.#timeup);
         this.#playerDead();
         
     }
